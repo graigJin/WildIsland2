@@ -2,17 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class World : MonoBehaviour
+public class World
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Member Variablen
+    Tile[,] tiles;
+    int width;
+    int height;
 
-    // Update is called once per frame
-    void Update()
+    // Properties
+    public Tile[,] Tiles { get => tiles; set => tiles = value; }
+    public int Width { get => width; private set => width = value; }
+    public int Height { get => height; private set => height = value; }
+
+    // Constructor
+    public World(int width, int height)
     {
-        
+        Tiles = new Tile[width,height];
+        Width = width;
+        Height = height;
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < height; z++)
+            {
+                Tiles[x, z] = new Tile(x, z, this);
+            }
+        }
     }
 }
